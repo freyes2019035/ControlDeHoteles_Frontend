@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "controlDeHoteles"
+    }
+  },
+  "defaultProject": "controlDeHoteles",
+  "cli": {
+    "analytics": "81992da0-f9ee-4cbe-a78b-fc5a85c154ea"
+  }
 }
