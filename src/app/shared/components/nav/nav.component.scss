@@ -1,0 +1,27 @@
+.bg-custom{
+    background-color: #D3E0EA;
+}
+.navbar__logo{
+    width: 50px;
+    height: 50px;
+}
+.formSearchBox{
+    margin-right: 30px;
+}
+.formSearchBox .formSearchBox__searchInput{
+    border: none;
+    border-radius: 20px;
+    width: 500px;
+    background-color: #f6f5f59f;
+    text-indent: 10px;
+} 
+.linklist li a{
+    padding-right: 20px;
+    font-size: 1.3em;
+}
+.linklist li img{
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+    object-fit: cover;
+}
