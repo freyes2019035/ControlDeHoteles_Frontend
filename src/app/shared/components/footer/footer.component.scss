@@ -1,0 +1,58 @@
+.footer{
+    background-color: #276678;
+    height: 50vh;      
+}
+.socialRow{
+    padding-top: 50px;
+}
+.socialRow .iconContainer{
+    background-color: white;
+    border-radius: 90px;
+    width: 60px;
+    height: 60px;
+    margin-right: 32px;
+    transition: 0.3s ease-in-out;
+}
+.socialRow .iconContainer:hover{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    transform: scale(1,1);
+}
+.socialRow .iconContainer:nth-child(1):hover{
+    background-color: #3b5998;
+}
+.socialRow .iconContainer:nth-child(2):hover{
+    background: #f09433; 
+    background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+    background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+}
+.socialRow .iconContainer:nth-child(3):hover{
+    background-color: #25d366;
+}
+.socialRow .iconContainer img{
+    margin: 15px;
+    width: 30px;
+    height: 30px;
+}
+.infoRow .infoRow__nav{
+    list-style: none;
+}
+.infoRow .infoRow__nav{
+    margin-top: 30px 
+}
+.infoRow .infoRow__nav li{
+    display: inline;
+    color: white;
+    font-size: 1.2em;
+    margin-right: 20px;
+}
+.terms{
+    font-size: 10pt; 
+    color: rgba(255, 255, 255, 0.541);
+}
+.copy{
+    position: relative;
+    top: 90px;
+    color: rgba(255, 255, 255, 0.541);
+}
