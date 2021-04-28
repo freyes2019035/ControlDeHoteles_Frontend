@@ -13,7 +13,7 @@ export class HotelService {
   constructor(private httpClient: HttpClient){
 
   }
-  getConfig(): Observable<any>{
+  getHotels(): Observable<any>{
     return this.httpClient.get(`${this.apiURL}hotel`, {headers: this.customHeaders})
   }
 }

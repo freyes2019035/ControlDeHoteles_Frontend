@@ -10,36 +10,18 @@
         <h1>Nuestros Hoteles mas solicitados</h1>
         <hr>
     </div>
-    <div class="principalHotels__carrousel">
-        <div class="principalHotels__carrousel--card">
+    <div *ngIf="hotels" class="principalHotels__carrousel">
+        <div *ngFor="let hotel of hotels; let i = index" class="principalHotels__carrousel--card">
             <div class="principalHotesl__carrousel--img">
-                <img src="../../../../assets/img/hotel.jpg" alt="hotel" >
+                <img src="{{hotels[i].images[0]}}" alt="imageOf_{{hotels[i].name}}" >
             </div>
             <div class="principalHotels__carrousel--description">
-                <h4>Hotel Magister</h4>
+                <h4>{{hotels[i].name}}</h4>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                    Magnam nulla et nihil molestiae dolore, qui minus illum suscipit 
-                    nisi repellendus odio magni, sapiente dolorem cumque, quas amet.
-                     Eaque, error ullam.
+                    {{hotels[i].description}}
                 </p>
-                <a href="" class="btn btn-light">Ver Detalles</a>
+                <a [routerLink]="['/hotel', hotels[i]._id]" class="btn btn-light">Ver Detalles</a>
             </div>
-        </div>
-        <div class="principalHotels__carrousel--card">
-            
-        </div>
-        <div class="principalHotels__carrousel--card">
-            
-        </div>
-        <div class="principalHotels__carrousel--card">
-            
-        </div>
-        <div class="principalHotels__carrousel--card">
-            
-        </div>
-        <div class="principalHotels__carrousel--card">
-            
         </div>
         
     </div>

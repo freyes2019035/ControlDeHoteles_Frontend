@@ -1,5 +1,6 @@
 export interface hotelModel{
     name: String,
+    description: String,
     address: String,
     phone: String,
     email: String,
