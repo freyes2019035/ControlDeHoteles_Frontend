@@ -16,4 +16,10 @@ export class HotelService {
   getHotels(): Observable<any>{
     return this.httpClient.get(`${this.apiURL}hotel`, {headers: this.customHeaders})
   }
+  getHotel(id): Observable<any>{
+    return this.httpClient.get(`${this.apiURL}hotel/${id}`, {headers: this.customHeaders})
+  }
+  getRoomHotel(id): Observable<any>{
+    return this.httpClient.get(`${this.apiURL}room/hotel/${id}`, {headers: this.customHeaders})
+  }
 }

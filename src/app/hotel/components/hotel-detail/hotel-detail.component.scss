@@ -1,0 +1,79 @@
+.hotel-detail .hotel-detail__name{
+    position: absolute;
+    z-index: 99999;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 5em;
+    font-weight: 500;
+}
+.hotel-detail .hotel-detail__description{
+    position: absolute;
+    z-index: 99999;
+    left: 52%;
+    top: 66%;
+    transform: translate(-51%, -51%);
+    color: white;
+    font-size: 1em;
+    font-weight: lighter;
+    text-align: center;
+}
+/* Hotel Rooms */
+.principalHotels__carrousel{
+    background-color: white;
+    margin: 90px 0px 0px 0px;
+    position: relative;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    width: 100%;
+    height: 700px;
+    display: grid;
+    grid-template-columns: repeat(6, auto);
+    grid-gap: 0 50px;
+    padding: 30px 60px;
+    padding-right: 0;   
+}
+.principalHotels__carrousel .principalHotels__carrousel--card{
+    text-align: center;
+    width: 398px;
+    height: 622px;
+    background: #FFFFFF;
+    box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.06), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 450ms all;
+}
+.principalHotels__carrousel:hover .principalHotels__carrousel--card:hover{
+    transform: scale(1.1);
+}
+.principalHotels__carrousel .principalHotels__carrousel--card .principalHotesl__carrousel--img img{
+    position: relative;
+    object-fit: cover;
+    width: 100%;
+    height: calc(622px / 2);
+    border-radius: 30px 30px 0px 0px;
+}
+
+.principalHotels__carrousel .principalHotels__carrousel--card .principalHotels__carrousel--description h4{
+    margin-top: 30px;
+    font-size: 2em;
+}
+.principalHotels__carrousel .principalHotels__carrousel--card .principalHotels__carrousel--description p{
+    text-align: center;
+    font-weight: 300;
+    margin: 20px 9px 0px 9px;
+}
+.principalHotels__carrousel .principalHotels__carrousel--card .principalHotels__carrousel--description a{
+    margin-top: 15px;
+    border-radius: 30px;
+    background-color: #1687A7;
+    color: white;
+    font-size: 1.1em;
+    width: 130px;
+    transition: 0.3s ease-in-out;
+}
+.principalHotels__carrousel .principalHotels__carrousel--card .principalHotels__carrousel--description a:hover{
+    transform: scale(1,1);
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
