@@ -12,7 +12,8 @@ export class GlobalService {
   }
   getIdentity(){
     if(localStorage.getItem('identity')){
-      return localStorage.getItem('identity');
+      let info = localStorage.getItem('identity');
+      return JSON.parse(info)
     }else{
       return false;
     }
