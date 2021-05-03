@@ -10,6 +10,13 @@ export class GlobalService {
   setIdentity(identity){
     localStorage.setItem('identity', JSON.stringify(identity))
   }
+  getIdentity(){
+    if(localStorage.getItem('identity')){
+      return localStorage.getItem('identity');
+    }else{
+      return false;
+    }
+  }
   setToken(token){
     localStorage.setItem('token', token);
   }

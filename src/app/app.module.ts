@@ -9,6 +9,8 @@ import { SharedModule } from './shared/shared.module';
 import { FormsModule ,ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+
+import { AuthGuardGuard } from './core/guards/auth-guard.guard'
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [AuthGuardGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
