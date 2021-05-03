@@ -1,0 +1,116 @@
+
+    $mainColor: #1687A7;
+    $baseLinearGradient: 90deg, #FF9A8B 0%, #FF6A88 55%, #FF99AC 100%;
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+}
+
+.login .login__card {
+    height: 450px;
+    width: 900px;
+    border-radius: 20px;
+    display: inline-flex;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.login .login__card .login__card--description {
+    height: 450px;
+    width: 450px;
+    border-radius: 20px 0 0 20px;
+    text-align: center;
+    font-size: 12pt;
+    background-color: $mainColor;
+    color: white;
+}
+
+.login .login__card .login__card--description .login__card--descriptionTitle {
+    padding-top: 150px;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.login .login__card .login__card--description .login__card--descriptionText {
+    padding-top: 5px;
+}
+
+.login .login__card .login__card--login {
+    height: 450px;
+    width: 450px;
+    border-radius: 0 20px 20px 0;
+    text-align: center;
+    background-color: white;
+}
+
+.login .login__card .login__card--login .login__card--loginTitle {
+    color: #707070;
+    font-size: 48px;
+    font-weight: bold;
+    padding-top: 35px;
+}
+
+.login__form {
+    padding-top: 30px;
+    display: inline-block;
+}
+.login .login__card .login__card--login .login__form input{
+    margin-bottom: 5px;
+}
+.login .login__card .login__card--login .login__form .login__form--emailInput {
+    display: block;
+    width: 250px;
+    height: 35px;
+    border: none;
+    box-shadow: 0 0 5pt 0.5pt #D3D3D3;
+    outline: none;
+    text-indent: 10px;
+    border-radius: 20px;
+}
+
+.login .login__card .login__card--login .login__form .login__form--emailInput::placeholder {
+    font-size: 15px;
+    font-weight: 100;
+    cursor: text;
+}
+
+.login .login__card .login__card--login .login__form .login__form--passwordInput {
+    width: 250px;
+    height: 35px;
+    display: block;
+    border: none;
+    box-shadow: 0 0 5pt 0.5pt #D3D3D3;
+    outline: none;
+    text-indent: 10px;
+    border-radius: 20px;
+}
+
+.login .login__card .login__card--login .login__form .login__form--passwordInput::placeholder {
+    font-size: 15px;
+    font-weight: 100;
+}
+
+.login .login__card .login__card--login .login__form .login__form--submitButton {
+    background-color: $mainColor;
+    color: white;
+    border-radius: 50px;
+    width: 120px;
+    height: 40px;
+    margin-top: 50px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    transition: 0.3s ease-in-out;
+}
+
+.login .login__card .login__card--login .login__form .login__form--submitButton:hover {
+    box-shadow: 0 0 5pt 3pt #D3D3D3;
+    transform: translateY(-3px);
+    cursor: pointer;
+}
+
+.login__card--newAccount a {
+    text-decoration: none;
+}

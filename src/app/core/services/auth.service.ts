@@ -18,6 +18,10 @@ export class AuthService {
     const body = JSON.stringify(user)
     return this.httpClient.post(`${this.apiURL}auth/login`, body, {headers: this.customHeaders})
   }
+  register(user): Observable<any>{
+    const body = JSON.stringify(user);
+    return this.httpClient.post(`${this.apiURL}auth/register`, body, {headers: this.customHeaders})
+  }
 
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service'
 import { GlobalService } from '../../../core/services/global.service'
+import {Router} from '@angular/router'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,10 +11,10 @@ import { GlobalService } from '../../../core/services/global.service'
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  token
   constructor(private formBuilder: FormBuilder, 
     private authService: AuthService, 
-    private globalService: GlobalService) { }
+    private globalService: GlobalService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.buildForm();
@@ -33,9 +34,10 @@ export class LoginComponent implements OnInit {
       this.authService.login(values, false).subscribe(data => {
         this.globalService.setIdentity(data);
         this.getToken();
+        this.router.navigate(['/home'])
       }, error => {
         if(error.status === 401){
-          alert('Your email or password are incorrect')
+          window.alert('Your email or password are incorrect')
         }
       })
     }else{
