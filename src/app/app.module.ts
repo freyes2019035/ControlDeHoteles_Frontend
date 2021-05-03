@@ -6,15 +6,20 @@ import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/components/layout/layout.component';
 import { SharedModule } from './shared/shared.module';
 
+import { FormsModule ,ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

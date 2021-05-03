@@ -22,9 +22,14 @@ const routes: Routes = [
       {
         path: 'room',
         loadChildren: () => import('./room/room.module').then(room => room.RoomModule)
-      }
-    ]
+      },
+    ],
+    
   },
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then(auth => auth.AuthModule)
+  }
 ];
 
 @NgModule({

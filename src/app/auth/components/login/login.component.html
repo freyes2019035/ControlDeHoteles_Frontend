@@ -1,0 +1,22 @@
+<section class="login">
+    <div class="login__card">
+       <div class="login__card--description">
+            <h1 class="login__card--descriptionTitle">Login</h1>
+            <p class="login__card--descriptionText">
+               Estas listo para poder descubrir los mejores hoteles
+            </p>
+            <div style="position: absolute; top: 82%; left: 43%; transform: translate(-100%, -100%);">
+                No tienes cuenta? 
+                <a routerLink="/auth/register"> Registrare aqui</a>
+            </div>
+       </div>
+       <div class="login__card--login">
+            <h2 class="login__card--loginTitle">Login</h2>
+            <form class="login__form" [formGroup]="loginForm" (ngSubmit)="login($event)">
+                <input type="text" class="login__form--emailInput" placeholder="Email" formControlName="user">
+                <input type="password" class="login__form--passwordInput" placeholder="Password" formControlName="password">
+                <button  type="submit" [disabled]="loginForm.invalid" class="login__form--submitButton">Log in</button>
+            </form>
+       </div>
+    </div>
+</section>
