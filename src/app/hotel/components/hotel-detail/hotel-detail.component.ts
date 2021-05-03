@@ -13,45 +13,59 @@ export class HotelDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private hotelService: HotelService) { }
   public error: Boolean;
+  public hotelId;
   public hotel: hotelModel;
   public rooms;
+  public events;
   ngOnInit(): void {
     this.getHotelID()
+    this.getHotel();
     this.getHotelRoom()
+    this.getHotelEvents()
   }
-
   getHotelID(){
     this.route.params.subscribe(params => {
       if(params.id){
-        this.hotelService.getHotel(params.id).subscribe(hotel => {
-          this.hotel = hotel;
-          this.error = false;
-        }, error => {
-          this.error = true;
-          console.error(error);
-        });
+        this.hotelId = params.id;
+        this.error = false;
       }else{
-        this.error = true;
+        this.error = true
       }
-      
+    }, error => {
+      this.error = true;
+      console.error(error)
     })
+  }
+  getHotel(){
+    this.hotelService.getHotel(this.hotelId).subscribe(hotel => {
+      this.hotel = hotel;
+      this.error = false;
+    }, error => {
+      this.error = true;
+      console.error(error);
+    });
   }
   getHotelRoom(){
-    this.route.params.subscribe(params => {
-      if(params.id){
-        this.hotelService.getRoomHotel(params.id).subscribe(rooms => {
-          this.rooms = rooms;
-          console.log(rooms)
-          this.error = false;
-        }, error => {
-          this.error = true;
-          console.error(error);
-        });
-      }else{
-        this.error = true;
-      }
-      
+    this.hotelService.getRoomHotel(this.hotelId).subscribe(rooms => {
+      this.rooms = rooms;
+      console.log(rooms)
+      this.error = false;
+    }, error => {
+      this.error = true;
+      console.error(error);
+    });
+  }
+  getHotelEvents(){
+    this.hotelService.getHotelEvents(this.hotelId).subscribe(events => {
+      console.log(events)
+      this.events = events
+      this.error = false;
+    }, error => {
+      this.error = true
+      console.error(error)
     })
   }
-
+  refreshPage(){
+    window.location.reload()
+  }
 }

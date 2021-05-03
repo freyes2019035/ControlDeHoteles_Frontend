@@ -22,4 +22,7 @@ export class HotelService {
   getRoomHotel(id): Observable<any>{
     return this.httpClient.get(`${this.apiURL}room/hotel/${id}`, {headers: this.customHeaders})
   }
+  getHotelEvents(id): Observable<any>{
+    return this.httpClient.get(`${this.apiURL}event/hotel/${id}`, {headers: this.customHeaders})
+  }
 }

@@ -20,51 +20,52 @@
     text-align: center;
 }
 /* Hotel Rooms */
-.principalHotels__carrousel{
+.hotel__carrousel{
     background-color: white;
-    margin: 90px 0px 0px 0px;
     position: relative;
     overflow-y: hidden;
     overflow-x: scroll;
     width: 100%;
-    height: 700px;
+    height: 600px;
     display: grid;
     grid-template-columns: repeat(6, auto);
     grid-gap: 0 50px;
     padding: 30px 60px;
     padding-right: 0;   
+
 }
-.principalHotels__carrousel .principalHotels__carrousel--card{
+.hotel__carrousel .hotel__carrousel--card{
     text-align: center;
     width: 398px;
-    height: 622px;
+    height: 530px;
     background: #FFFFFF;
     box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.06), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
     border-radius: 30px;
     cursor: pointer;
     transition: 450ms all;
 }
-.principalHotels__carrousel:hover .principalHotels__carrousel--card:hover{
+.hotel__carrousel:hover .hotel__carrousel--card:hover{
     transform: scale(1.1);
 }
-.principalHotels__carrousel .principalHotels__carrousel--card .principalHotesl__carrousel--img img{
+.hotel__carrousel .hotel__carrousel--card .principalHotesl__carrousel--img img{
     position: relative;
     object-fit: cover;
     width: 100%;
-    height: calc(622px / 2);
+    height: calc(530px / 2);
     border-radius: 30px 30px 0px 0px;
 }
 
-.principalHotels__carrousel .principalHotels__carrousel--card .principalHotels__carrousel--description h4{
+.hotel__carrousel .hotel__carrousel--card .hotel__carrousel--description h4{
     margin-top: 30px;
     font-size: 2em;
+    text-transform: capitalize;
 }
-.principalHotels__carrousel .principalHotels__carrousel--card .principalHotels__carrousel--description p{
+.hotel__carrousel .hotel__carrousel--card .hotel__carrousel--description p{
     text-align: center;
     font-weight: 300;
     margin: 20px 9px 0px 9px;
 }
-.principalHotels__carrousel .principalHotels__carrousel--card .principalHotels__carrousel--description a{
+.hotel__carrousel .hotel__carrousel--card .hotel__carrousel--description a{
     margin-top: 15px;
     border-radius: 30px;
     background-color: #1687A7;
@@ -73,7 +74,17 @@
     width: 130px;
     transition: 0.3s ease-in-out;
 }
-.principalHotels__carrousel .principalHotels__carrousel--card .principalHotels__carrousel--description a:hover{
+.hotel__carrousel .hotel__carrousel--card .hotel__carrousel--description a:hover{
     transform: scale(1,1);
     box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+.hotel-detail__rooms{
+    text-align: left;
+    padding-top: 10px;
+}
+.hotel-detail__rooms .hotel-detail__rooms--title{
+    font-size: 2em;
+    margin-top: 30px;
+    margin-left: 65px;
+    font-weight: medium;
 }
