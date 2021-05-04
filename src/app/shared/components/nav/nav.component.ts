@@ -11,6 +11,7 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.globalService.getIdentity();
+    console.log(this.user)
   }
 
 }
