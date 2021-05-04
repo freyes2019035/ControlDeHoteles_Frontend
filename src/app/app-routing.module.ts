@@ -28,12 +28,21 @@ const routes: Routes = [
         loadChildren: () => import('./room/room.module').then(room => room.RoomModule),
         canActivate: [AuthGuardGuard],
       },
+      {
+        path: 'user',
+        loadChildren: () => import('./user/user.module').then(user => user.UserModule),
+        canActivate: [AuthGuardGuard],
+      }
     ],
     
   },
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(auth => auth.AuthModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'home'
   }
 ];
 
