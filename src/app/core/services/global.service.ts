@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-
+import { Router } from '@angular/router'
 @Injectable({
   providedIn: 'root'
 })
 export class GlobalService {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   setIdentity(identity){
     localStorage.setItem('identity', JSON.stringify(identity))
@@ -27,5 +27,11 @@ export class GlobalService {
     }else{
       return 'we dont found a token'
     }
+  }
+
+  logOut(){
+    localStorage.removeItem('identity')
+    localStorage.removeItem('token')
+    this.router.navigate(['/auth/login'])
   }
 }

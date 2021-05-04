@@ -11,19 +11,26 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AuthGuardGuard } from './core/guards/auth-guard.guard'
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
+
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
   ],
   imports: [
+    SnotifyModule,
     HttpClientModule,
     BrowserModule,
     CommonModule,
     AppRoutingModule,
     SharedModule,
   ],
-  providers: [AuthGuardGuard],
+  providers: [
+    AuthGuardGuard,
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    SnotifyService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

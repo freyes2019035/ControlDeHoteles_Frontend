@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service'
 import { GlobalService } from '../../../core/services/global.service'
 import {Router} from '@angular/router'
+import { NotificationsService } from '../../../core/services/notifications.service'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, 
     private authService: AuthService, 
     private globalService: GlobalService,
-    private router: Router) { }
+    private router: Router, private notificationsService: NotificationsService) { }
 
   ngOnInit(): void {
     this.buildForm();
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit {
         this.globalService.setIdentity(data);
         this.getToken();
         this.router.navigate(['/home'])
+        this.notificationsService.success('Welcome back !!', 'This is great to have you here')
       }, error => {
         if(error.status === 401){
           window.alert('Your email or password are incorrect')
