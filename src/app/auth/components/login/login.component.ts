@@ -39,7 +39,9 @@ export class LoginComponent implements OnInit {
         this.notificationsService.success('Welcome back !!', 'This is great to have you here')
       }, error => {
         if(error.status === 401){
-          window.alert('Your email or password are incorrect')
+          this.notificationsService.warning("Jmmmm...", "Your email or password are incorrect")
+        }else if(error.status === 404){
+          this.notificationsService.warning("Jmmmm...", "That user do not exist in our records, Maybe you can register")
         }
       })
     }else{

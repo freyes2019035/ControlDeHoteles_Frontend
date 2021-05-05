@@ -10,7 +10,7 @@
         <h1>Nuestros Hoteles mas solicitados</h1>
         <hr>
     </div>
-    <div *ngIf="hotels" class="principalHotels__carrousel">
+    <div *ngIf="hotels" class="principalHotels__carrousel" id="hotels">
         <div *ngFor="let hotel of hotels; let i = index" class="principalHotels__carrousel--card">
             <div class="principalHotesl__carrousel--img">
                 <img src="{{hotels[i].images[0]}}" alt="imageOf_{{hotels[i].name}}" >

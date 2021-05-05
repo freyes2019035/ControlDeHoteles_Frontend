@@ -1,1 +1,126 @@
-<p>room-detail works!</p>
+<div class="roomDetail" *ngIf="room">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-5">
+                <div class="roomDetail__card">
+                    <img [src]="room[0].images[0]" class="roomDetail__card--img">
+                    <h4 class="roomDetail__card--title">{{room[0].name}}</h4>
+                    <ul class="list-group pt-3">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Precio
+                          <span class="badge badge-primary badge-pill">{{room[0].price | currency: 'Q'}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Disponible
+                          <span class="badge badge-success badge-pill">Si</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-6">
+                <form [formGroup]="reservationForm" (ngSubmit)="addReservation($event)">
+                    <div class="form-group">
+                      <label for="llegada">Fecha de llegada</label>
+                      <input type="date" class="form-control" id="llegada" placeholder="Arrive Date" formControlName="dateOfArrive">
+                    </div>
+                    <div class="form-group">
+                      <label for="salida">Fecha de salida</label>
+                      <input type="date" class="form-control" id="salida" placeholder="Departure Date" formControlName="dateOfDeparture">
+                    </div>
+                    <p>
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        Agregar Servicios extra
+                    </button>
+                    </p>
+                    <div class="collapse" id="collapseExample">
+                    <div class="card card-body" >
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center" [id]="service._id" *ngFor="let service of hotelServices; let position = index;">
+                              {{service.name}}
+                              <span class="badge badge-primary badge-pill">{{service.price}}</span>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16" (click)="addService($event, service)">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                              </svg>
+                            </li>
+                        </ul>
+                    </div>
+                    </div>
+                    
+                    <div class="form-group" *ngIf="servicesSelected">
+                        <label>Servicios Extra</label>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let serviceSelected of servicesSelectedRender">
+                              {{serviceSelected.name}}
+                              <span class="badge badge-primary badge-pill">{{serviceSelected.price}}</span>
+                            </li>
+                          </ul>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="terms" id="terms" value="option2">
+                        <label class="form-check-label" for="terms" >
+                          Acepto los terminos y condiciones
+                        </label>
+                    </div>
+                    <div class="form-group pt-5">
+                          <button type="submit" class="btn btn-success" [disabled]="reservationForm.invalid" (click)="ok()">Reservar ahora</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Button trigger modal -->
+    <button type="button" id="btnToClick" class="btn btn-primary" data-toggle="modal" data-target="#openModal" [hidden]="true">
+        Launch demo modal
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" >
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Recipe Information</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body" *ngIf="reservationInformation">
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Reservacion exitosa, {{personName}}</h5>
+                        <small>{{reservationInformation[0].dateOfReservation | date}}</small>
+                      </div>
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>  
+                            <th scope="col">SubTotal Habitacion</th>
+                            <th scope="col">SubTotal Servicios</th>
+                            <th scope="col">Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">1</th>
+                            <td>{{reservationInformation[0].subTotalRoom | currency: 'Q'}}</td>
+                            <td>{{reservationInformation[0].subTotalServices | currency: 'Q'}}</td>
+                            <td><b>{{reservationInformation[1].total | currency: 'Q'}}</b></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <small>Id de reservacion: {{reservationInformation[0]._id}}</small>
+                      <br>
+                      <small>Id de factura: {{reservationInformation[1]._id}}</small>
+                      <br>
+                      <small>Id de hotel: {{reservationInformation[0].hotel}}</small>
+                    </a>
+                  </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="navigateToHome()">Ok</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
