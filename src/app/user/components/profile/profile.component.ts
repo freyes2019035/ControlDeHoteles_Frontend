@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NotificationsService } from 'src/app/core/services/notifications.service';
 import { GlobalService } from '../../../core/services/global.service'
 import { UserService } from '../../../core/services/user.service'
-
+import { SnotifyService } from 'ng-snotify';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -18,7 +19,9 @@ export class ProfileComponent implements OnInit {
     private globalService: GlobalService,
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private notificationsService: NotificationsService) { }
+    private notificationsService: NotificationsService,
+    private router: Router,
+    private snotifyService: SnotifyService) { }
 
   ngOnInit(): void {
     this.buildForm();
@@ -57,5 +60,28 @@ export class ProfileComponent implements OnInit {
     }, error => {
       console.error(error)
     })
+  }
+  deleteMyAccount(){
+    this.snotifyService.confirm('This action is irreversible', '¿Are you sure to delete your account?', {
+      timeout: 5000,
+      showProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: true,
+      buttons: [
+        {text: 'Yes',
+        action: (toast) => {
+          this.userService.deleteMyAccount().subscribe(service => {
+            this.notificationsService.success("Success", "Your account was deleted... 😞");
+            this.globalService.logOut();
+            this.router.navigate(['/auth/login']);
+          }, error => {
+            console.error(error);
+          });
+          this.snotifyService.remove(toast.id);
+        },bold: false},
+        {text: 'No', action: (toast) => {console.log('Clicked: No'); this.snotifyService.remove(toast.id); }, bold: true},
+        {text: 'Close', action: (toast) => {console.log('Clicked: No'); this.snotifyService.remove(toast.id); }, bold: true},
+      ]
+    });
   }
 }

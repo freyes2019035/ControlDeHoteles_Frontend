@@ -26,4 +26,8 @@ export class UserService {
     let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
     return this.httpClient.get(`${this.apiURL}reservation/my`, {headers: authHeader})
   }
+  deleteMyAccount(): Observable<any>{
+    let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
+    return this.httpClient.delete(`${this.apiURL}user/deleteAccount`, {headers: authHeader})
+  }
 }
