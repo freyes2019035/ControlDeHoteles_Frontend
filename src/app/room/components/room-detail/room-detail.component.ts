@@ -88,11 +88,12 @@ export class RoomDetailComponent implements OnInit {
       this.reservationInformation = reservation;
       this.reservationForm.markAsPristine()
       this.reservationSuccess = true;
-     document.getElementById("btnToClick").click();
-
+      this.ok();
     }, error => {
       this.reservationSuccess = false;
-      console.error(error)
+      if(error.status === 409){
+        this.notificationsService.warning("Sorry...", "The reservation for that day already exists")
+      }
 
     })
   }
