@@ -14,6 +14,11 @@ export class HotelService {
   constructor(private httpClient: HttpClient, private globalService: GlobalService){
 
   }
+  getHotelByName(name: String): Observable<any>{
+    let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
+    let body = JSON.stringify(name);
+    return this.httpClient.post(`${this.apiURL}hotel/searchByName`,body,{headers: authHeader});
+  }
   getHotels(): Observable<any>{
     return this.httpClient.get(`${this.apiURL}hotel`, {headers: this.customHeaders})
   }
