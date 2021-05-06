@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AuthGuardGuard } from './core/guards/auth-guard.guard'
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
@@ -26,6 +28,7 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
     CommonModule,
     AppRoutingModule,
     SharedModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     AuthGuardGuard,
