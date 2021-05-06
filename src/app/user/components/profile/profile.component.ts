@@ -57,6 +57,7 @@ export class ProfileComponent implements OnInit {
     this.userService.getAllServices().subscribe(services => {
       this.services = services;
       console.log(services)
+      console.log(services[0].reservation.hotel.name)
     }, error => {
       console.error(error)
     })

@@ -31,16 +31,18 @@
                 <h2 class="text-center mt-5">Your Services</h2>
                 <p class="text-center text-muted">This is the history of your services</p>
                 <div class="list-group">
-                  <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let service of services">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h5 class="mb-1">Reservacion en: </h5>
-                      <small>{{service.emision_date | date}}</small>
-                    </div>
-                    <p class="mb-1"><b>Fecha de Llegada</b> {{service.reservation.dateOfArrive | date}}</p>
-                    <p class="mb-1"><b>Fecha de Salida</b> {{service.reservation.dateOfDeparture | date}}</p>
-                    <p class="mb-1"><b>Dias de estadia</b> {{service.reservation.noOfDaysOfStay}}</p>
-                    <small>Total: {{service.total | currency: 'Q'}}</small>
-                  </a>
+                  <div class="containerServices">
+                    <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let service of services; let i = index; ">
+                      <div class="d-flex w-100 h-auto justify-content-between">
+                        <h5 class="mb-1">Reservaste en {{service.reservation.hotel.name}}</h5>
+                        <small>{{service.emision_date | date}}</small>
+                      </div>
+                      <p class="mb-1"><b>Fecha de Llegada</b> {{service.reservation.dateOfArrive | date}}</p>
+                      <p class="mb-1"><b>Fecha de Salida</b> {{service.reservation.dateOfDeparture | date}}</p>
+                      <p class="mb-1"><b>Dias de estadia</b> {{service.reservation.noOfDaysOfStay }}</p>
+                      <small>Total: {{service.total | currency: 'Q'}}</small>
+                    </a>
+                  </div>
                 </div>
             </div>
         </div>
