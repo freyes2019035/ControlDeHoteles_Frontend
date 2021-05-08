@@ -21,7 +21,6 @@ export class UserComponent implements OnInit {
   }
   fetchUsers(){
     this.userService.getUsers().subscribe(users => {
-      console.log(users.users)
       this.users = users.users; 
     }, error => {
       console.error(error)
