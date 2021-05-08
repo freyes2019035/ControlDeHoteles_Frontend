@@ -13,14 +13,20 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { AdminNavComponent } from './components/admin-nav/admin-nav.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list'
+import { MatListModule } from '@angular/material/list';
+import { UserComponent } from './components/user/user.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort'
 
 @NgModule({
   declarations: [
     AdminDashboardComponent,
-    AdminNavComponent
+    AdminNavComponent,
+    UserComponent
   ],
   imports: [
+    MatTableModule,
     CommonModule,
     AdminRoutingModule,
     MatGridListModule,
@@ -31,7 +37,9 @@ import { MatListModule } from '@angular/material/list'
     LayoutModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatPaginatorModule,
+    MatSortModule,
   ]
 })
 export class AdminModule { }

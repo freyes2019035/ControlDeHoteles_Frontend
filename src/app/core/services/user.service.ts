@@ -12,7 +12,10 @@ export class UserService {
   customHeaders = new HttpHeaders().set('Content-Type', 'application/json')
   constructor(private httpClient: HttpClient,  private globalService: GlobalService) { }
 
-
+  getUsers(): Observable<any>{
+    let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
+    return this.httpClient.get(`${this.apiURL}user/getUsers/`,{headers: authHeader})
+  }
   getUser(): Observable<any>{
     let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
     return this.httpClient.get(`${this.apiURL}user/getUser/`,{headers: authHeader})

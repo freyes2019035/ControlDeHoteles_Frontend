@@ -14,6 +14,7 @@ import { AuthGuardGuard } from './core/guards/auth-guard.guard'
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     SharedModule,
     BrowserAnimationsModule,
+    MatTableModule
   ],
   providers: [
     AuthGuardGuard,

@@ -5,7 +5,7 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Users</a>
+      <a mat-list-item routerLink="/admin/user">Users</a>
       <a mat-list-item href="#">Hotel</a>
       <a mat-list-item href="#">Reservations</a>
       <a mat-list-item href="#">My Hotel</a>
@@ -24,6 +24,6 @@
       <span>controlDeHoteles</span>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <app-admin-dashboard></app-admin-dashboard>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
