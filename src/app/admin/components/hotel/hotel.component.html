@@ -1,0 +1,147 @@
+<h4 class="hotelTitleLeft mt-3">Hotel Stadistics</h4>
+<div>
+  <div style="display: block">
+    <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            *ngIf="barChartData">
+    </canvas>
+  </div>
+</div>
+
+
+<h4 class="hotelTitleLeft mt-3">Hotels</h4>
+<table mat-table [dataSource]="dataSource" class="">
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let hotel">{{ hotel.name }}</td>
+  </ng-container>
+
+  <!-- Phone Column -->
+  <ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef>Phone</th>
+    <td mat-cell *matCellDef="let hotel">{{ hotel.phone }}</td>
+  </ng-container>
+
+  <!-- Email Column -->
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef>Email</th>
+    <td mat-cell *matCellDef="let hotel">{{ hotel.email }}</td>
+  </ng-container>
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>Description</th>
+    <td mat-cell *matCellDef="let hotel">
+      {{ hotel.description | slice: 0:50 }}...
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="creation_Date">
+    <th mat-header-cell *matHeaderCellDef>Creation Date</th>
+    <td mat-cell *matCellDef="let hotel">{{ hotel.creation_Date | date }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+<section class="hotelActions mt-5">
+    <h4 class="hotelTitleLeft">Create Hotel</h4>
+    <form class="ml-3 mr-3 mt-5" [formGroup]="hotelForm">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Name</label>
+            <input type="text" class="form-control" placeholder="Name Of Hotel" formControlName="name">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputAddress">Address</label>
+            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" formControlName="address">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Phone</label>
+            <input type="tel" class="form-control" placeholder="Phone of Hotel" formControlName="phone">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputEmail">Email</label>
+            <input type="text" class="form-control" id="inputEmail" placeholder="yourHotel@gmail.com" formControlName="email">
+          </div>
+          <div class="form-group col-12">
+            <label for="inputPassword4">Description</label>
+            <textarea class="form-control" id="inputPassword" rows="3" formControlName="description"></textarea>
+          </div>
+          <div class="form-inline">
+            <div class="form-group mb-2">
+              <label for="image" class="sr-only">Images</label>
+              <input type="text" readonly class="form-control-plaintext" id="image" value="Add Images">
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+              <label for="inputImage" class="sr-only">Image</label>
+              <input type="text" class="form-control" id="inputImage" placeholder="Example: http://www.myimage.jpg" formControlName="images">
+            </div>
+            <button class="btn btn-primary mb-2" (click)="addImage()">Add Image</button>
+            <br>
+            <div class="imagesDisplay" *ngIf="images.length >= 1">
+                <img [src]="image" *ngFor="let image of images" class="m-3">
+            </div>
+         
+        </div>
+        </div>
+        <button [disabled]="hotelForm.invalid || images.length === 0 ? true: false" type="submit" class="btn btn-success" (click)="createHotel($event)">Create Hotel</button>
+      </form>
+
+</section>
+
+  <!-- Button trigger modal -->
+  <button type="button" id="btnToClick" class="btn btn-primary" data-toggle="modal" data-target="#openModal" [hidden]="true">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Hotel Information</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body" *ngIf="newHotel">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                  User Information
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                      <b>Username:</b> {{newHotel[0].user.username}}
+                  </li>
+                  <li class="list-group-item">
+                      <b>Password:</b> 123456
+                  </li>
+                  <li class="list-group-item">
+                    <b>Email:</b> {{newHotel[0].user.email}}
+                  </li>
+                </ul>
+            </div>
+            <div class="card mt-3">
+                <h5 class="card-header">Hotel Information | {{newHotel[1].hotel.creation_Date | date}}</h5>
+                <div class="card-body">
+                  <h5 class="card-title">{{newHotel[1].hotel.name}}</h5>
+                  <p class="card-text">{{newHotel[1].hotel.description}}</p>
+                  <p class="card-text text-muted">Address: {{newHotel[1].hotel.address}}</p>
+                  <div class="imagesDisplay mt-2">
+                    <img [src]="image" *ngFor="let image of newHotel[1].hotel.images" class="m-3">
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+        </div>
+    </div>
+    </div>
+</div>
+

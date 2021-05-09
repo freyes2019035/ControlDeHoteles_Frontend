@@ -18,4 +18,8 @@ export class ReservationService {
     let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
     return this.httpClient.post(`${this.apiURL}reservation/create`,body,{headers: authHeader})
   }
+  getAllReservations(): Observable<any>{
+    let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
+    return this.httpClient.get(`${this.apiURL}reservation/all`,{headers: authHeader})
+  }
 }

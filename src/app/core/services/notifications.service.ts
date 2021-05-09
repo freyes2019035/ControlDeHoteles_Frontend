@@ -24,4 +24,12 @@ export class NotificationsService {
       pauseOnHover: false
     });
   }
+  error(title = "Success", subtitle = ""){
+    this.snotify.error(subtitle, title,{
+      timeout: 3000,
+      showProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false
+    });
+  }
 }

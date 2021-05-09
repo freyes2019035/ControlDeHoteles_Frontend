@@ -17,15 +17,20 @@ import { MatListModule } from '@angular/material/list';
 import { UserComponent } from './components/user/user.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort'
+import { MatSortModule } from '@angular/material/sort';
+import { HotelComponent } from './components/hotel/hotel.component'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
     AdminDashboardComponent,
     AdminNavComponent,
-    UserComponent
+    UserComponent,
+    HotelComponent
   ],
   imports: [
+    ChartsModule,
     MatTableModule,
     CommonModule,
     AdminRoutingModule,
@@ -40,6 +45,8 @@ import { MatSortModule } from '@angular/material/sort'
     MatListModule,
     MatPaginatorModule,
     MatSortModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class AdminModule { }
