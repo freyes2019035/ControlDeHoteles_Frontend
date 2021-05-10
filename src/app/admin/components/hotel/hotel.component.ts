@@ -10,11 +10,19 @@ import { ReservationService } from 'src/app/core/services/reservation.service';
   styleUrls: ['./hotel.component.scss']
 })
 export class HotelComponent implements OnInit {
+  // Tabla Data
   displayedColumns: string[] = ['name', 'phone', 'email', 'description', 'creation_Date'];
-  dataSource;
+  hotelsFound;
+  // Reservation Form
+  reservationStadisticsForm: FormGroup;
+  reservationsFound = [];
+  // Add New Hotel
   hotelForm: FormGroup;
   images = [];
   newHotel: any;
+  // Chart Vars
+  public isHotelSelected: Boolean;
+  dataSource;
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true
@@ -23,19 +31,23 @@ export class HotelComponent implements OnInit {
   public barChartType = 'bar';
   public barChartLegend = true;
   public barChartData = [];
+  // Reservation Chart Vars
+  public barChartLabelsReservation = ['2021'];
   public barChartDataReservations = [];
-
+  public reservationsLength;
+  public reservationsTotal;
+  public promedyOfDaysInReservation;
   constructor(private hotelService: HotelService,private formBuilder: FormBuilder, private notificationsService: NotificationsService, private reservationService: ReservationService) { }
 
   ngOnInit(): void {
     this.buildForm();
     this.getHotels();
-    this.buildStadisticsOfReservations();
   }
   getHotels(){
     this.hotelService.getHotels().subscribe(hotels => {
       console.log(hotels); 
      this.dataSource = hotels;
+     this.hotelsFound = hotels;
      this.buildStadistics();
     }, error => {
       console.error(error)
@@ -51,21 +63,6 @@ export class HotelComponent implements OnInit {
     }
     
   }
-  buildStadisticsOfReservations(){
-    this.reservationService.getAllReservations().subscribe(reservations => {
-      let reservationData = reservations;
-      console.log(reservations)
-      // for (let i = 0; i < reservationData.length; i++) {
-      //   let label = reservationData[i].name;
-      //   let reservationNumber = reservationData[i].no_reservations;
-      //   let obj = {data: [reservationNumber], label: label}
-      //   this.barChartData.push(obj)
-      //   console.log(this.barChartData)
-      // }
-    }, error => {
-      this.notificationsService.error("Jmmm..", "error on get al reservations") 
-    }) 
-  }
   buildForm(){
     this.hotelForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -74,6 +71,9 @@ export class HotelComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       description: ['', [Validators.required]],
       images: ['', [Validators.required]]
+    });
+    this.reservationStadisticsForm = this.formBuilder.group({
+      hotelId: ['', [Validators.required]]
     });
   }
 
@@ -101,6 +101,54 @@ export class HotelComponent implements OnInit {
   }
   triggerModal(){
     document.getElementById("btnToClick").click();
+  }
+  generateReport(event: Event){
+    event.preventDefault;
+    const {hotelId} = this.reservationStadisticsForm.value;
+    this.reservationService.getReservetationOfHotel(hotelId).subscribe(hotelReservations => {
+      if(hotelReservations.length === 0){
+        this.notificationsService.warning("Jmmmm...", "We can not find any reservation");
+      }else{
+        console.log(hotelReservations)
+        this.reservationsLength = hotelReservations.length;
+        this.reservationsFound = hotelReservations;
+        this.buildStadisticsOfReservationsDays();
+        this.calcTotalOfReservations();
+        this.calcPromedyOfDaysInReservation();
+        this.isHotelSelected = true;
+        
+        this.notificationsService.success("Success !!", "Loading ....")
+      }
+    }, error => {
+      this.notificationsService.error("Jmmm", "some error ocurrs fetching reservations")
+    })
+    
+  }
+  buildStadisticsOfReservationsDays(){
+    let hotelData = this.reservationsFound;
+    console.log(hotelData)
+    for (let i = 0; i < hotelData.length; i++) {
+      let label = hotelData[i].roomID.name;
+      let numberOfDays = hotelData[i].noOfDaysOfStay;
+      let obj = {data: [numberOfDays], label: label}
+      this.barChartDataReservations.push(obj);
+    }
+  }
+  calcPromedyOfDaysInReservation(){
+    let data = this.reservationsFound;
+    let d = 0;
+    data.map((hotel) => {
+      d += Number(hotel.noOfDaysOfStay);
+    });
+    this.promedyOfDaysInReservation = Math.round(d / data.length).toFixed(0);
+  }
+  calcTotalOfReservations(){
+    let data = this.reservationsFound;
+    let a = 0;
+    data.map((hotel) => {
+      a += Number(hotel.subTotalRoom + hotel.subTotalServices);
+    });
+    this.reservationsTotal = a;
   }
 }
 
