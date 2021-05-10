@@ -5,10 +5,9 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="/admin/user">Users</a>
-      <a mat-list-item routerLink="/admin/hotel">Hotel</a>
-      <a mat-list-item href="#">Reservations</a>
-      <a mat-list-item href="#">My Hotel</a>
+      <a mat-list-item routerLink="/admin/user" *ngIf="isAdminAPP">Users</a>
+      <a mat-list-item routerLink="/admin/hotel" *ngIf="isAdminAPP">Hotel</a>
+      <a mat-list-item href="#" *ngIf="isHotelAdmin">My Hotel</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
