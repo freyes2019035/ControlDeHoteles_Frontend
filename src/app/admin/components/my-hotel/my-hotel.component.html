@@ -1,0 +1,36 @@
+<div class="loader" *ngIf="isLoading">
+    Loading....
+</div>
+<section class="myHotel">
+    <h2 class="text-center myHotelTitle">Hotel {{reservationsFound[0].hotel.name}}</h2>
+    <div class="myHotel__reservations">
+        <h4 class="text-left ml-4 text-muted">Reservations</h4>
+        <div class="table-responsive">
+            <table class="table table-hover w-100 mt-3">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Fecha de Reservacion</th>
+                    <th scope="col">Fecha De Llegada</th>
+                    <th scope="col">Fecha De Salida</th>
+                    <th scope="col">Hotel Name</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let reservation of reservationsFound">
+                    <th scope="row">{{reservation._id}}</th>
+                    <td>{{reservation.dateOfReservation | date}}</td>
+                    <td>{{reservation.dateOfArrive | date}}</td>
+                    <td>{{reservation.dateOfDeparture | date}}</td>
+                    <th>{{reservation.hotel.name}}</th>
+                    <th>{{reservation.user.username}}</th>
+                    <th *ngIf="reservation.status === 'Finalizada'"><span class="badge bg-danger text-white">{{reservation.status}}</span></th>
+                    <th *ngIf="reservation.status === 'En proceso'"><span class="badge bg-warning text-white">{{reservation.status}}</span></th>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

@@ -5,9 +5,8 @@ import { CanActivate, Router } from '@angular/router'
   providedIn: 'root'
 })
 export class AuthGuardGuard implements CanActivate {
-
   constructor(private router: Router, private globalService: GlobalService){
-
+  
   }
   canActivate(): boolean{
     if(this.globalService.getIdentity()){

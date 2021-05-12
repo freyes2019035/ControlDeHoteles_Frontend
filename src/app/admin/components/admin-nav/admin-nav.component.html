@@ -7,7 +7,8 @@
     <mat-nav-list>
       <a mat-list-item routerLink="/admin/user" *ngIf="isAdminAPP">Users</a>
       <a mat-list-item routerLink="/admin/hotel" *ngIf="isAdminAPP">Hotel</a>
-      <a mat-list-item href="#" *ngIf="isHotelAdmin">My Hotel</a>
+      <a mat-list-item routerLink="/admin/myHotel" *ngIf="isHotelAdmin" >My Hotel</a>
+      <a mat-list-item class="d-flex align-items-end" (click)="logOut()">Log Out</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

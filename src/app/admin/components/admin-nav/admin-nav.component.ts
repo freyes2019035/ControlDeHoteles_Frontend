@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { GlobalService } from 'src/app/core/services/global.service';
+import { NotificationsService } from 'src/app/core/services/notifications.service';
 
 @Component({
   selector: 'app-admin-nav',
@@ -19,8 +20,12 @@ export class AdminNavComponent {
   isAdminAPP: Boolean;
   isHotelAdmin: Boolean;
   isDifferent: Boolean;
-  constructor(private breakpointObserver: BreakpointObserver, private globalService: GlobalService) {
+  constructor(private breakpointObserver: BreakpointObserver, private globalService: GlobalService, private notificationsService: NotificationsService) {
     this.checkRol();
+  }
+  logOut(){
+    this.globalService.logOut();
+    this.notificationsService.success('Ok bye 😞', 'See you soon...')
   }
   checkRol(){
     let identity = this.globalService.getIdentity();

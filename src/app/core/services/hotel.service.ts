@@ -35,6 +35,11 @@ export class HotelService {
     let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
     return this.httpClient.get(`${this.apiURL}service/hotel/${id}`, {headers: authHeader})
   }
+  getHotelByEmail(email): Observable<any>{
+    let body = JSON.stringify(email);
+    let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
+    return this.httpClient.post(`${this.apiURL}hotel/getHotelByEmail/`, body ,{headers: authHeader})
+  }
   createHotel(hotel){
     let body = JSON.stringify(hotel);
     let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())

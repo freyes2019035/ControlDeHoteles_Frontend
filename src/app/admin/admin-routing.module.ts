@@ -4,6 +4,7 @@ import { AdminNavComponent } from './components/admin-nav/admin-nav.component'
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component'
 import { UserComponent } from './components/user/user.component'
 import { HotelComponent } from './components/hotel/hotel.component';
+import { MyHotelComponent } from './components/my-hotel/my-hotel.component';
 const routes: Routes = [
   {
     path: '',
@@ -20,6 +21,10 @@ const routes: Routes = [
       {
         path: 'hotel',
         component: HotelComponent
+      },
+      {
+        path: 'myHotel',
+        component: MyHotelComponent
       }
     ]
   },

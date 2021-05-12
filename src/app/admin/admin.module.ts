@@ -21,13 +21,15 @@ import { MatSortModule } from '@angular/material/sort';
 import { HotelComponent } from './components/hotel/hotel.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
+import { MyHotelComponent } from './components/my-hotel/my-hotel.component';
 
 @NgModule({
   declarations: [
     AdminDashboardComponent,
     AdminNavComponent,
     UserComponent,
-    HotelComponent
+    HotelComponent,
+    MyHotelComponent
   ],
   imports: [
     ChartsModule,

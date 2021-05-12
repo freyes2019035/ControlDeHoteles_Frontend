@@ -35,7 +35,12 @@ export class LoginComponent implements OnInit {
       this.authService.login(values, false).subscribe(data => {
         this.globalService.setIdentity(data);
         this.getToken();
-        this.router.navigate(['/home'])
+        console.log(data);
+        if(data.user.rol === "ROL_ADMINAPP" || data.user.rol === "ROL_ADMINHOTEL"){
+          this.router.navigate(['/admin'])
+        }else {
+          this.router.navigate(['/home'])
+        }
         this.notificationsService.success('Welcome back !!', 'This is great to have you here')
       }, error => {
         if(error.status === 401){
