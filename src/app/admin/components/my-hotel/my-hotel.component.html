@@ -67,6 +67,26 @@
     <div class="roomFunctions mt-5">
       <h4 class="text-left ml-4 text-muted">Functions Of Room</h4>
       <hr>
-      <h4 class="text-left ml-4">Habitaciones Libres</h4>
+      <h4 class="text-left ml-4">Free Rooms</h4>
+      <div class="table-responsive">
+        <table class="table table-hover w-100 mt-3">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Room Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let reservation of roomFree">
+                <th scope="row" class="text-capitalize">{{reservation.roomID._id}}</th>
+                <th class="text-capitalize">{{reservation.roomID.name}}</th>
+                <th class="text-capitalize">{{reservation.roomID.price | currency: 'Q'}}</th>
+                <th *ngIf="reservation.status === 'Finalizada'"><span class="badge bg-success text-white">Libre</span></th>
+              </tr>
+            </tbody>
+        </table>
+    </div>
     </div>
 </section>

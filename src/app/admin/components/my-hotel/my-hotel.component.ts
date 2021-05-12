@@ -17,6 +17,7 @@ export class MyHotelComponent implements OnInit {
   isError: Boolean;
   reservationsFound = [];
   stateOfReservation: Boolean;
+  roomFree = [];
   userFound = [];
   constructor(
     private reservationService: ReservationService,
@@ -33,6 +34,7 @@ export class MyHotelComponent implements OnInit {
   }
 
   getReservetationOfHotel(){
+    let a = [];
     const hotelEmail = this.identity.user;
     this.isLoading = true;
     this.hotelService.getHotelByEmail(hotelEmail).subscribe(hotel => {
@@ -43,7 +45,8 @@ export class MyHotelComponent implements OnInit {
             let currentDate = new Date().toISOString().substring(0,10);
             
             if(reservDate <= currentDate){
-              reserv.status = 'Finalizada'
+              reserv.status = 'Finalizada';
+              this.roomFree.push(reserv);
               this.stateOfReservation = false;
             }else if(arriveDate > currentDate){
                 reserv.status = 'Pendiente'
