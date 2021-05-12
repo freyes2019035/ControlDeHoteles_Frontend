@@ -1,8 +1,8 @@
 <div class="loader" *ngIf="isLoading">
     Loading....
 </div>
-<section class="myHotel">
-    <h2 class="text-center myHotelTitle">Hotel {{reservationsFound[0].hotel.name}}</h2>
+<section class="myHotel" *ngIf="reservationsFound">
+    <!-- <h2 class="text-center myHotelTitle">Hotel {{reservationsFound[0].hotel.name}}</h2> -->
     <div class="myHotel__reservations">
         <h4 class="text-left ml-4 text-muted">Reservations</h4>
         <div class="table-responsive">
@@ -28,9 +28,45 @@
                     <th>{{reservation.user.username}}</th>
                     <th *ngIf="reservation.status === 'Finalizada'"><span class="badge bg-danger text-white">{{reservation.status}}</span></th>
                     <th *ngIf="reservation.status === 'En proceso'"><span class="badge bg-warning text-white">{{reservation.status}}</span></th>
+                    <th *ngIf="reservation.status === 'Pendiente'"><span class="badge bg-info text-white">{{reservation.status}}</span></th>
                   </tr>
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="userFunctions mt-5">
+      <h4 class="text-left ml-4 text-muted">Functions Of User</h4>
+      <hr>
+      <h4 class="text-left ml-4">Search User</h4>
+      <form action="" class="m-4" [formGroup]="searchForm">
+        <input type="text" class="form-control" placeholder="Name of person" formControlName="searchPerson">
+      </form>
+      
+      <table class="table table-hover" *ngIf="userFound.length > 1">
+        <thead>
+          <tr>
+            <th scope="col">Id De usuario</th>
+            <th scope="col">Name</th>
+            <th scope="col">Username</th>
+            <th scope="col">Reservations</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="userFound">
+            <th scope="row">{{userFound[0].user._id}}</th>
+            <td>{{userFound[0].user.name}}</td>
+            <td>{{userFound[0].user.username}}</td>
+            <td>{{userFound.length}}</td>
+            
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+    <div class="roomFunctions mt-5">
+      <h4 class="text-left ml-4 text-muted">Functions Of Room</h4>
+      <hr>
+      <h4 class="text-left ml-4">Habitaciones Libres</h4>
     </div>
 </section>
