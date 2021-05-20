@@ -83,7 +83,7 @@
                 <th scope="row" class="text-capitalize">{{reservation.roomID._id}}</th>
                 <th class="text-capitalize">{{reservation.roomID.name}}</th>
                 <th class="text-capitalize">{{reservation.roomID.price | currency: 'Q'}}</th>
-                <th *ngIf="reservation.status === 'Finalizada'"><span class="badge bg-success text-white">Libre</span></th>
+                <th *ngIf="reservation.status == 'Finalizada'"><span class="badge bg-success text-white">Libre</span></th>
               </tr>
             </tbody>
         </table>

@@ -19,6 +19,7 @@ export class MyHotelComponent implements OnInit {
   stateOfReservation: Boolean;
   roomFree = [];
   userFound = [];
+  temporal = [];
   constructor(
     private reservationService: ReservationService,
     private globalService: GlobalService, 
@@ -34,11 +35,11 @@ export class MyHotelComponent implements OnInit {
   }
 
   getReservetationOfHotel(){
-    let a = [];
     const hotelEmail = this.identity.user;
     this.isLoading = true;
     this.hotelService.getHotelByEmail(hotelEmail).subscribe(hotel => {
         this.reservationService.getReservetationOfHotel(hotel[0]._id).subscribe(reservations => {
+          this.filterArray(reservations)
           reservations.map(reserv => {
             let reservDate = new Date(reserv.dateOfDeparture).toISOString().substring(0,10)
             let arriveDate = new Date(reserv.dateOfArrive).toISOString().substring(0,10)
@@ -46,7 +47,7 @@ export class MyHotelComponent implements OnInit {
             
             if(reservDate <= currentDate){
               reserv.status = 'Finalizada';
-              this.roomFree.push(reserv);
+              this.temporal.push(reserv);
               this.stateOfReservation = false;
             }else if(arriveDate > currentDate){
                 reserv.status = 'Pendiente'
@@ -56,12 +57,14 @@ export class MyHotelComponent implements OnInit {
             }
             
           })
+          this.filterArray(this.temporal);
           this.reservationsFound = reservations;
           this.isLoading = false;
         }, error => {
           this.isError = true;
           this.notificationsService.error('Error !!', 'Something went wrong getting the data')
         })
+        
     }, error => {
       this.isError = true;
       this.notificationsService.error('Error !!', 'Something went wrong verifying your hotel') 
@@ -91,5 +94,9 @@ export class MyHotelComponent implements OnInit {
     this.searchForm = this.formBuilder.group({
       searchPerson: ['', [Validators.required]],
     })
+  }
+  filterArray(array: any[]){
+    let filtered = array.filter(obj => !array[obj.roomID._id] && (array[obj.roomID._id] = true));
+    this.roomFree = filtered;
   }
 }
