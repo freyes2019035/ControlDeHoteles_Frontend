@@ -9,3 +9,15 @@
         margin-top: 30px;
     }
 }
+.imagesDisplay{
+    width: 100%;
+    height: 150px;
+    display: block;
+    overflow: scroll;
+}
+.imagesDisplay img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 20px;
+}

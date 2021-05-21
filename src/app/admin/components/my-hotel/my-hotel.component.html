@@ -67,7 +67,7 @@
     <div class="roomFunctions mt-5">
       <h4 class="text-left ml-4 text-muted">Functions Of Room</h4>
       <hr>
-      <h4 class="text-left ml-4">Free Rooms</h4>
+      <h4 class="text-left ml-4 mt-4">Free Rooms</h4>
       <div class="table-responsive">
         <table class="table table-hover w-100 mt-3">
             <thead>
@@ -88,5 +88,111 @@
             </tbody>
         </table>
     </div>
+    <h4 class="text-left ml-4 mt-4">Add Room</h4>
+    <hr>
+    <form class="m-4" [formGroup]="addRoom">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">Name</label>
+          <input type="text" class="form-control" id="inputName" placeholder="Name" formControlName="name">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPrice">Price</label>
+          <input type="number" class="form-control" id="inputPrice" placeholder="Price" formControlName="price">
+        </div>
+      </div>
+      <div class="form-inline">
+        <div class="form-group mb-2">
+          <label for="staticImage" class="sr-only">Image</label>
+          <input type="text" readonly class="form-control-plaintext" id="staticImage" value="Add Image to room">
+        </div>
+        <div class="form-group mx-sm-3 mb-2">
+          <label for="inputImages" class="sr-only">Images</label>
+          <input type="text" class="form-control" id="inputImages" placeholder="https://MyawesomePhoto.jpg" formControlName="images">
+        </div>
+        <button class="btn btn-success mb-2" (click)="addImage()">Add Image</button>
+      </div>
+      <div>
+        <div class="imagesDisplay" *ngIf="images.length >= 1">
+          <img [src]="image" *ngFor="let image of images" class="m-3">
+        </div>
+      </div>
+      <button [disabled]="addRoom.invalid || images.length === 0 ? true: false" type="submit" class="btn btn-primary" (click)="createRoom($event)">Submit</button>
+    </form>
+    </div>
+    <div class="eventFunctions mt-5">
+      <h4 class="text-left ml-4 text-muted">Functions Of Events</h4>
+      <hr>
+      <h4 class="text-left ml-4 mt-4">Add Event</h4>
+      <hr>
+      <form class="m-4" [formGroup]="eventForm">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Name</label>
+            <input type="text" class="form-control" id="inputName" placeholder="Name" formControlName="name">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputDescription">Description</label>
+            <input type="text" class="form-control" id="inputDescription" placeholder="Description" formControlName="description">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="inputHour">Hour</label>
+            <input type="time" class="form-control" id="inputHour" placeholder="Name" formControlName="hour">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputPrice">Date</label>
+            <input type="date" class="form-control" id="inputPrice" placeholder="Price" formControlName="date">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputState">Type Of Event</label>
+            <select id="inputState" class="form-control" formControlName="typeOfEvent">
+              <option selected>Choose...</option>
+              <option *ngFor="let Tevent of typeOfEvent">{{Tevent.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-inline">
+          <div class="form-group mb-2">
+            <label for="staticImage" class="sr-only">Image</label>
+            <input type="text" readonly class="form-control-plaintext" id="staticImage" value="Add Image to room">
+          </div>
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="inputImages" class="sr-only">Images</label>
+            <input type="text" class="form-control" id="inputImages" placeholder="https://MyawesomePhoto.jpg" formControlName="images">
+          </div>
+          <button class="btn btn-success mb-2" (click)="addImageOfEvent($event)">Add Image</button>
+        </div>
+        <div>
+          <div class="imagesDisplay" *ngIf="eventImages.length >= 1">
+            <img [src]="image" *ngFor="let image of eventImages" class="m-3">
+          </div>
+        </div>
+        <button [disabled]="eventForm.invalid || eventImages.length === 0 ? true: false" type="submit" class="btn btn-primary" (click)="createEvent($event)">Submit</button>
+      </form>
+    </div>
+    <div class="ServicesFunctions">
+      <h4 class="text-left ml-4 text-muted">Services Functions</h4>
+      <hr>
+      <h4 class="text-left ml-4 mt-4">Add Service</h4>
+      <hr>
+      <form class="m-4" [formGroup]="serviceForm">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Name</label>
+            <input type="text" class="form-control" id="inputName" placeholder="Name" formControlName="name">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputDescription">Description</label>
+            <input type="text" class="form-control" id="inputDescription" placeholder="Description" formControlName="description">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPrice">Price</label>
+            <input type="number" class="form-control" id="inputPrice" placeholder="Price" formControlName="price">
+          </div>
+        </div>
+        <button [disabled]="serviceForm.invalid ? true: false" type="submit" class="btn btn-primary" (click)="createService($event)">Submit</button>
+      </form>
     </div>
 </section>

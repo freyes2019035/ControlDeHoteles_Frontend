@@ -17,4 +17,9 @@ export class RoomService {
     let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
     return this.httpClient.get(`${this.apiURL}room/${id}`,{headers: authHeader})
   }
+  createRoom(room): Observable<any>{
+    let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
+    let body = JSON.stringify(room);
+    return this.httpClient.post(`${this.apiURL}room/create`, body ,{headers: authHeader})
+  }
 }

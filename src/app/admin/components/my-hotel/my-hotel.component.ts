@@ -4,6 +4,7 @@ import { GlobalService } from 'src/app/core/services/global.service';
 import { HotelService } from 'src/app/core/services/hotel.service';
 import { NotificationsService } from 'src/app/core/services/notifications.service';
 import { ReservationService } from 'src/app/core/services/reservation.service';
+import { RoomService } from 'src/app/core/services/room.service';
 
 @Component({
   selector: 'app-my-hotel',
@@ -12,6 +13,9 @@ import { ReservationService } from 'src/app/core/services/reservation.service';
 })
 export class MyHotelComponent implements OnInit {
   searchForm: FormGroup;
+  addRoom: FormGroup;
+  eventForm: FormGroup;
+  serviceForm: FormGroup;
   isLoading: Boolean;
   identity;
   isError: Boolean;
@@ -20,20 +24,30 @@ export class MyHotelComponent implements OnInit {
   roomFree = [];
   userFound = [];
   temporal = [];
+  images = [];
+  eventImages = [];
+  hotelInfo = [];
+  events = [];
+  typeOfEvent = []
   constructor(
     private reservationService: ReservationService,
     private globalService: GlobalService, 
     private notificationsService: NotificationsService,
     private hotelService: HotelService, 
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private roomService: RoomService) { }
 
   ngOnInit(): void {
     this.identity = this.globalService.getIdentity();
     this.getReservetationOfHotel()
     this.buildForm();
     this.searchPerson();
+    this.getTypeOfEvents();
+    const hotelEmail = this.identity.user;
+    this.hotelService.getHotelByEmail(hotelEmail).subscribe(hotel => {
+      this.hotelInfo = hotel;
+    });
   }
-
   getReservetationOfHotel(){
     const hotelEmail = this.identity.user;
     this.isLoading = true;
@@ -90,9 +104,121 @@ export class MyHotelComponent implements OnInit {
 
     })
   }
+  addImageOfEvent(event: Event){
+    event.preventDefault;
+    if(this.eventImages.includes(this.eventForm.get('images').value)){
+      this.notificationsService.error('Error', 'The image already exists in the selected images')
+    }else{
+      this.eventImages.push(this.eventForm.get('images').value);
+      console.log(this.eventImages) 
+    }
+  }
+  addImage(){
+    if(this.images.includes(this.addRoom.get('images').value)){
+      this.notificationsService.error('Error', 'The image already exists in the selected images')
+    }else{
+      this.images.push(this.addRoom.get('images').value);
+      console.log(this.images) 
+    }
+  }
+  createRoom(event: Event){
+    event.preventDefault;
+    const data = this.addRoom.value;
+    data.images = this.images;
+    data.hotel = this.hotelInfo[0]._id;
+    // Send Data
+    this.roomService.createRoom(data).subscribe(room => {
+      let roomUrl = `http://localhost:4200/room/${room._id}`
+      window.open(roomUrl, '_blank');
+      this.notificationsService.success('Room Created', `The room was opened in a new tab`)
+      this.addRoom.reset();
+      this.addRoom.markAsPristine();
+      this.images = [];
+    }, error => {
+      console.error(error)
+      if(error.status === 409){
+        this.notificationsService.error('Error', 'Error the room already exists');  
+      }else{
+        this.notificationsService.error('Error', 'Error creating the room');
+      }
+      
+    })
+  }
+  createEvent(event: Event){
+    event.preventDefault;
+    let data = this.eventForm.value;
+    data.hotel = this.hotelInfo[0]._id;
+    data.typeOfEvent = this.typeOfEvent.find(Tevent => Tevent.name === data.typeOfEvent)._id;
+    data.images = this.eventImages;
+    this.hotelService.createEvent(data).subscribe(newEvent => {
+      let hotelURL = `http://localhost:4200/hotel/${this.hotelInfo[0]._id}`
+      window.open(hotelURL, '_blank');
+      this.notificationsService.success('Sucess', 'Event created correctly')
+      this.eventForm.markAsPristine();
+      this.eventForm.reset();
+      this.eventImages = [];
+    }, error => {
+      if(error.status === 409){
+        this.notificationsService.error('Error', 'Error the event already exists');  
+      }else{
+        this.notificationsService.error('Error', 'Error creating the event');
+      }
+    })
+    console.log(data)
+  }
+  createService(event: Event){
+    event.preventDefault;
+    let data = this.serviceForm.value;
+    data.hotel = this.hotelInfo[0]._id;
+    this.hotelService.createServiceExtra(data).subscribe(service => {
+      this.notificationsService.success('Success','Service correctly created');
+      this.serviceForm.markAsPristine();
+      this.serviceForm.reset();
+    }, error => {
+      if(error.status === 409){
+        this.notificationsService.error('Error', 'Error the service already exists');  
+      }else{
+        this.notificationsService.error('Error', 'Error creating the service');
+      }
+    })
+  }
   buildForm(){
     this.searchForm = this.formBuilder.group({
       searchPerson: ['', [Validators.required]],
+    });
+    this.addRoom = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      images: ['', [Validators.required]]
+    })
+    this.eventForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      images: ['', [Validators.required]],
+      typeOfEvent: ['', [Validators.required]],
+      hour: ['', [Validators.required]],
+      date: ['', [Validators.required]]
+    });
+    this.serviceForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+    })
+  }
+  getEvents(){
+    const hotelId = this.hotelInfo[0]._id;
+    this.hotelService.getHotelEvents(hotelId).subscribe(events => {
+      this.events = events;
+    }, error => {
+      this.notificationsService.error('Error', 'Error getting events');
+    })
+  }
+  getTypeOfEvents(){
+    this.hotelService.getTypeOfEvents().subscribe(tEvent => {
+      this.typeOfEvent = tEvent;
+    }, error => {
+      console.error(error)
+      this.notificationsService.error('Error', 'Error getting type of events');
     })
   }
   filterArray(array: any[]){
