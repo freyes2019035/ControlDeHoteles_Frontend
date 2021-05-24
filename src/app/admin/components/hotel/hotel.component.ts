@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SnotifyService } from 'ng-snotify';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HotelService } from 'src/app/core/services/hotel.service';
 import { NotificationsService } from 'src/app/core/services/notifications.service';
@@ -37,7 +38,7 @@ export class HotelComponent implements OnInit {
   public reservationsLength;
   public reservationsTotal;
   public promedyOfDaysInReservation;
-  constructor(private hotelService: HotelService,private formBuilder: FormBuilder, private notificationsService: NotificationsService, private reservationService: ReservationService) { }
+  constructor(private hotelService: HotelService,private formBuilder: FormBuilder, private notificationsService: NotificationsService, private reservationService: ReservationService, private snotify: SnotifyService) { }
 
   ngOnInit(): void {
     this.buildForm();
@@ -151,13 +152,30 @@ export class HotelComponent implements OnInit {
     this.reservationsTotal = a;
   }
   deleteHotel(id, event: Event){
-    this.hotelService.deleteHotel(id).subscribe(deleted => {
-      this.notificationsService.success('Success', 'Hotel deleted Succesfuly')
-      this.getHotels();
-    }, error => {
-      console.error(error)
-      this.notificationsService.error('Error', 'Jmmm some error ocurrs deleting hotel')
-    })
+    this.snotify.confirm('This action is unresible', 'Are you sure ?', {
+      timeout: 5000,
+      showProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: true,
+      buttons: [
+        {
+          text: 'Yes',
+         action: (toast) => {
+          this.hotelService.deleteHotel(id).subscribe(deleted => {
+            this.notificationsService.success('Success', 'Hotel deleted Succesfuly')
+            this.getHotels();
+            this.snotify.remove(toast.id);
+          }, error => {
+            console.error(error)
+            this.notificationsService.error('Error', 'Jmmm some error ocurrs deleting hotel')
+          })
+         },
+        bold: false
+        },
+        {text: 'No', action: (toast) => {console.log('Clicked: No'); this.snotify.remove(toast.id); }, bold: true},
+        {text: 'Close', action: (toast) => {console.log('Clicked: No'); this.snotify.remove(toast.id); }, bold: true},
+      ]
+    });
   }
 }
 
