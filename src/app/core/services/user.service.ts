@@ -20,10 +20,19 @@ export class UserService {
     let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
     return this.httpClient.get(`${this.apiURL}user/getUser/`,{headers: authHeader})
   }
+  getUserById(id: any): Observable<any>{
+    let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
+    return this.httpClient.get(`${this.apiURL}user/getUserById/${id}`,{headers: authHeader})
+  }
   updateUser(user): Observable<any>{
     let params = JSON.stringify(user);
     let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
     return this.httpClient.put(`${this.apiURL}user/updateAccount`,params,{headers: authHeader})
+  }
+  updateUserById(id, user): Observable<any>{
+    let params = JSON.stringify(user);
+    let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
+    return this.httpClient.put(`${this.apiURL}user/updateAccountById/${id}`,params,{headers: authHeader})
   }
   getAllServices() :Observable<any>{
     let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
@@ -32,5 +41,9 @@ export class UserService {
   deleteMyAccount(): Observable<any>{
     let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
     return this.httpClient.delete(`${this.apiURL}user/deleteAccount`, {headers: authHeader})
+  }
+  deleteAccountById(id): Observable<any>{
+    let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
+    return this.httpClient.delete(`${this.apiURL}user/deleteAccountById/${id}`, {headers: authHeader})
   }
 }
