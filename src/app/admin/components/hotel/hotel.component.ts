@@ -11,7 +11,7 @@ import { ReservationService } from 'src/app/core/services/reservation.service';
 })
 export class HotelComponent implements OnInit {
   // Tabla Data
-  displayedColumns: string[] = ['name', 'phone', 'email', 'description', 'creation_Date'];
+  displayedColumns: string[] = ['name', 'phone', 'email', 'description', 'creation_Date', 'actions'];
   hotelsFound;
   // Reservation Form
   reservationStadisticsForm: FormGroup;
@@ -149,6 +149,9 @@ export class HotelComponent implements OnInit {
       a += Number(hotel.subTotalRoom + hotel.subTotalServices);
     });
     this.reservationsTotal = a;
+  }
+  deleteHotel(id, event: Event){
+
   }
 }
 

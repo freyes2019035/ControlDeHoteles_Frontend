@@ -23,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { MyHotelComponent } from './components/my-hotel/my-hotel.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
+import { HotelDetailComponent } from './components/hotel-detail/hotel-detail.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { UserDetailComponent } from './components/user-detail/user-detail.compon
     UserComponent,
     HotelComponent,
     MyHotelComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    HotelDetailComponent
   ],
   imports: [
     ChartsModule,

@@ -6,6 +6,7 @@ import { UserComponent } from './components/user/user.component'
 import { UserDetailComponent } from './components/user-detail/user-detail.component'
 import { HotelComponent } from './components/hotel/hotel.component';
 import { MyHotelComponent } from './components/my-hotel/my-hotel.component';
+import { HotelDetailComponent } from './components/hotel-detail/hotel-detail.component';
 const routes: Routes = [
   {
     path: '',
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path: 'hotel',
         component: HotelComponent
+      },
+      {
+        path: 'hotel/update/:id',
+        component: HotelDetailComponent
       },
       {
         path: 'myHotel',

@@ -59,4 +59,9 @@ export class HotelService {
     let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
     return this.httpClient.post(`${this.apiURL}hotel/create`, body ,{headers: authHeader})
   }
+  updateHotel(id, hotel){
+    let body = JSON.stringify(hotel);
+    let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
+    return this.httpClient.put(`${this.apiURL}hotel/update/${id}`, body ,{headers: authHeader})
+  }
 }
