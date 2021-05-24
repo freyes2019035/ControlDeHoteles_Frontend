@@ -151,7 +151,13 @@ export class HotelComponent implements OnInit {
     this.reservationsTotal = a;
   }
   deleteHotel(id, event: Event){
-
+    this.hotelService.deleteHotel(id).subscribe(deleted => {
+      this.notificationsService.success('Success', 'Hotel deleted Succesfuly')
+      this.getHotels();
+    }, error => {
+      console.error(error)
+      this.notificationsService.error('Error', 'Jmmm some error ocurrs deleting hotel')
+    })
   }
 }
 

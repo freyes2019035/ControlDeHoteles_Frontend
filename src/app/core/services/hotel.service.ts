@@ -64,4 +64,8 @@ export class HotelService {
     let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
     return this.httpClient.put(`${this.apiURL}hotel/update/${id}`, body ,{headers: authHeader})
   }
+  deleteHotel(id){
+    let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
+    return this.httpClient.delete(`${this.apiURL}hotel/delete/${id}`, {headers: authHeader})
+  }
 }
