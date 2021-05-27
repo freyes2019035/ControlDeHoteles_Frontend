@@ -23,6 +23,8 @@ export class NavComponent implements OnInit {
     this.user = this.globalService.getIdentity();
     this.buildForm();
     this.onChanges()
+    console.log(this.user);
+    
   }
   logOut(){
     this.globalService.logOut();

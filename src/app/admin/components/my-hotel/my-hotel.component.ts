@@ -92,13 +92,11 @@ export class MyHotelComponent implements OnInit {
         this.userFound = [];
       }else{
         this.reservationsFound.map(reservation => {
-            let dataReceived = data;
-            let regex = new RegExp(dataReceived, "g");
-            let userName = String(reservation.user.name + " " + reservation.user.lastName);
-            let found = userName.match(regex);
-            if(found){
-              this.userFound.push({"reservation": reservation, "user": reservation.user})
-            }
+            let regex = new RegExp(data, "ig");
+            let userName = String(reservation.user.name);
+            let found  = regex.test(userName);
+            found ? this.userFound.push({"reservation": reservation, "user": reservation.user}) : null
+            
         });
       }
 

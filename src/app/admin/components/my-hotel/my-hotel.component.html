@@ -34,6 +34,8 @@
             </table>
         </div>
     </div>
+
+
     <div class="userFunctions mt-5">
       <h4 class="text-left ml-4 text-muted">Functions Of User</h4>
       <hr>
@@ -42,7 +44,7 @@
         <input type="text" class="form-control" placeholder="Name of person" formControlName="searchPerson">
       </form>
       
-      <table class="table table-hover" *ngIf="userFound.length > 1">
+      <table class="table table-hover" *ngIf="userFound.length >= 1">
         <thead>
           <tr>
             <th scope="col">Id De usuario</th>
@@ -53,17 +55,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngIf="userFound">
+          <tr *ngIf="userFound.length >= 1">
             <th scope="row">{{userFound[0].user._id}}</th>
             <td>{{userFound[0].user.name}}</td>
             <td>{{userFound[0].user.username}}</td>
-            <td>{{userFound.length}}</td>
-            
+            <span class="badge badge-pill badge-success pt" style="margin-top: 15px">Yes</span>
           </tr>
         </tbody>
       </table>
       
     </div>
+
+
+
+
+    
     <div class="roomFunctions mt-5">
       <h4 class="text-left ml-4 text-muted">Functions Of Room</h4>
       <hr>

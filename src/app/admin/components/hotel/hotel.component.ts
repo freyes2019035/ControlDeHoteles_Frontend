@@ -28,7 +28,7 @@ export class HotelComponent implements OnInit {
     scaleShowVerticalLines: false,
     responsive: true
   };
-  public barChartLabels = ['2020'];
+  public barChartLabels = ['2021'];
   public barChartType = 'bar';
   public barChartLegend = true;
   public barChartData = [];
