@@ -68,4 +68,13 @@ export class HotelService {
     let authHeader = this.customHeaders.set('Authorization', this.globalService.getToken())
     return this.httpClient.delete(`${this.apiURL}hotel/delete/${id}`, {headers: authHeader})
   }
+  generatePDF(id){
+    const httpOptions = {
+      responseType: 'blob' as 'json',
+      headers: new HttpHeaders({
+        'Authorization': this.globalService.getToken(),
+      })
+    };
+    return this.httpClient.get(`${this.apiURL}hotel/${id}/generate/pdf`, httpOptions)
+  }
 }
